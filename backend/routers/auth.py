@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, status
-from pydantic import BaseModel, EmailStr
+from schemas import UserCreate, UserLogin, UserResponse, LoginResponse
 from supabase import create_client, Client
 import os
 from dotenv import load_dotenv
@@ -10,25 +10,6 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 load_dotenv()
-
-# --- Pydantic Models ---
-class UserCreate(BaseModel):
-    email: EmailStr
-    phone_number: str
-    password: str
-
-class UserLogin(BaseModel):
-    identifier: str  # Can be email or phone
-    password: str
-
-class UserResponse(BaseModel):
-    message: str
-    user_id: str = None
-    
-class LoginResponse(BaseModel):
-    message: str
-    access_token: str = None
-    user: dict = None
 
 # --- Supabase Client Initialization ---
 try:
