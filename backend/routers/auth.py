@@ -47,7 +47,9 @@ async def register_user(user_data: UserCreate):
             "password": user_data.password,
             "options": {
                 "data": {
-                    "phone_number": user_data.phone_number
+                    "phone_number": user_data.phone_number,
+                    "business_name": user_data.business_name,
+                    "province": user_data.province
                 }
             }
         })

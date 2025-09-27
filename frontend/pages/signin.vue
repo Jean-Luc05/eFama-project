@@ -1,3 +1,63 @@
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'nuxt/app';
+
+// Initialize router for redirection
+const router = useRouter();
+// Define reactive form data
+const form = ref({
+  email: '',
+  password: '',
+  remember: false
+})
+
+// Add refs for displaying messages
+const errorMessage = ref('');
+const successMessage = ref('');
+
+// The updated function to handle form submission
+async function handleSubmit() {
+  errorMessage.value = '';
+  successMessage.value = '';
+
+  try {
+    // Send the data to your FastAPI backend
+    const response = await $fetch('http://127.0.0.1:8000/auth/login', {
+      method: 'POST',
+      body: {
+        identifier: form.value.email, // The backend expects an 'identifier' field
+        password: form.value.password,
+      }
+    });
+
+    successMessage.value = response.message;
+
+    // On success, redirect to the dashboard after a short delay
+    setTimeout(() => {
+      router.push('/dashboard');
+    }, 1500);
+
+  } catch (error) {
+    // Handle errors from the backend
+    errorMessage.value = error.data?.detail || 'An unexpected error occurred.';
+  }
+}
+
+// Handle Google sign-in
+const signInWithGoogle = () => {
+  console.log('Google sign-in clicked')
+  // Add your Google OAuth logic here
+}
+
+// Set page metadata
+useHead({
+  title: 'Sign In - Your App Name',
+  meta: [
+    { name: 'description', content: 'Sign in to your account' }
+  ]
+})
+</script>
+
 <!-- pages/signin.vue -->
 <template>
   <div class="bg-white min-h-screen flex items-center justify-center p-4">
@@ -62,6 +122,15 @@
             </NuxtLink>
           </div>
 
+
+          <!-- ADD THESE LINES FOR MESSAGES -->
+          <div v-if="errorMessage" class="my-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
+            <span>{{ errorMessage }}</span>
+          </div>
+          <div v-if="successMessage" class="my-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded" role="alert">
+            <span>{{ successMessage }}</span>
+          </div>
+
           <!-- Submit Button -->
           <button 
             type="submit"
@@ -114,32 +183,3 @@
   </div>
 </template>
 
-<script setup>
-// Define reactive form data
-const form = ref({
-  email: '',
-  password: '',
-  remember: false
-})
-
-// Handle form submission
-const handleSubmit = () => {
-  console.log('Form submitted:', form.value)
-  // Add your authentication logic here
-  // Example: await $fetch('/api/auth/signin', { method: 'POST', body: form.value })
-}
-
-// Handle Google sign-in
-const signInWithGoogle = () => {
-  console.log('Google sign-in clicked')
-  // Add your Google OAuth logic here
-}
-
-// Set page metadata
-useHead({
-  title: 'Sign In - Your App Name',
-  meta: [
-    { name: 'description', content: 'Sign in to your account' }
-  ]
-})
-</script>

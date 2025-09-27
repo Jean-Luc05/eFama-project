@@ -1,3 +1,62 @@
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'nuxt/app';
+
+// Initialize the router for redirection
+const router = useRouter();
+
+// Create reactive variables to hold the form data
+const email = ref('');
+const phoneNumber = ref('');
+const businessName = ref('');
+const province = ref('');
+const password = ref('');
+const confirmPassword = ref('');
+const terms = ref(false);
+
+// Refs for displaying messages to the user
+const errorMessage = ref('');
+const successMessage = ref('');
+
+// This function is called when the form is submitted
+async function handleSignup() {
+  errorMessage.value = '';
+  successMessage.value = '';
+
+  if (password.value !== confirmPassword.value) {
+    errorMessage.value = "Passwords do not match.";
+    return;
+  }
+  if (!terms.value) {
+    errorMessage.value = "You must agree to the terms of service.";
+    return;
+  }
+
+  try {
+    const response = await $fetch('http://127.0.0.1:8000/auth/register', {
+      method: 'POST',
+      body: {
+        email: email.value,
+        phone_number: phoneNumber.value,
+        password: password.value,
+        business_name: businessName.value,
+        province: province.value,
+      }
+    });
+
+    successMessage.value = response.message;
+
+    // Redirect to the signin page after 2 seconds
+    setTimeout(() => {
+      router.push('/signin');
+    }, 2000);
+
+  } catch (error) {
+    errorMessage.value = error.data?.detail || 'An unexpected error occurred.';
+  }
+}
+</script>
+
 <template>
 <body class="bg-white min-h-screen flex items-center justify-center p-4">
     <div class="w-full max-w-4xl">
@@ -31,7 +90,7 @@
                 </div>
 
                 <!-- Form -->
-                <form class="space-y-6">
+                <form @submit.prevent="handleSignup" class="space-y-6">
                     <!-- Two Column Grid for Large Screens -->
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <!-- Left Column -->
@@ -40,6 +99,7 @@
                             <div>
                                 <label for="email" class="block text-sm font-medium text-black mb-2">Email Address</label>
                                 <input 
+                                    v-model="email"
                                     type="email" 
                                     id="email" 
                                     name="email" 
@@ -53,6 +113,7 @@
                             <div>
                                 <label for="phone" class="block text-sm font-medium text-black mb-2">Phone Number</label>
                                 <input 
+                                    v-model="phoneNumber"
                                     type="tel" 
                                     id="phone" 
                                     name="phone" 
@@ -66,6 +127,7 @@
                             <div>
                                 <label for="business" class="block text-sm font-medium text-black mb-2">Business Name</label>
                                 <input 
+                                    v-model="businessName"
                                     type="text" 
                                     id="business" 
                                     name="business" 
@@ -82,6 +144,7 @@
                             <div>
                                 <label for="province" class="block text-sm font-medium text-black mb-2">Province</label>
                                 <select 
+                                    v-model="province"
                                     id="province" 
                                     name="province" 
                                     required 
@@ -108,6 +171,7 @@
                             <div>
                                 <label for="password" class="block text-sm font-medium text-black mb-2">Password</label>
                                 <input 
+                                    v-model="password"
                                     type="password" 
                                     id="password" 
                                     name="password" 
@@ -122,6 +186,7 @@
                             <div>
                                 <label for="confirm-password" class="block text-sm font-medium text-black mb-2">Confirm Password</label>
                                 <input 
+                                    v-model="confirmPassword"
                                     type="password" 
                                     id="confirm-password" 
                                     name="confirm-password" 
@@ -133,10 +198,17 @@
                             </div>
                         </div>
                     </div>
-
+                    
+                    <div v-if="errorMessage" class="my-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                            <span>{{ errorMessage }}</span>
+                        </div>
+                        <div v-if="successMessage" class="my-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                            <span>{{ successMessage }}</span>
+                    </div>
                     <!-- Terms and Conditions -->
                     <div class="flex items-start gap-3">
                         <input 
+                            v-model="terms"
                             type="checkbox" 
                             id="terms" 
                             name="terms" 

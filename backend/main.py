@@ -23,11 +23,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# --- Supabase Client Setup ---
-# url: str = os.environ.get("SUPABASE_URL")
-# key: str = os.environ.get("SUPABASE_KEY")
-# supabase: Client = create_client(url, key)
-
 # --- Include the Auth Router from routers/auth.py ---
 app.include_router(auth.router)
 
