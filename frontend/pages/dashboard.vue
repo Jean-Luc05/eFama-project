@@ -1,330 +1,255 @@
 <template>
-<body class="bg-gray-50 font-sans">
-     Navigation Bar 
+  <div class="min-h-screen bg-gray-50">
+    <!-- Navbar -->
     <nav class="bg-white shadow-sm border-b border-gray-200 fixed w-full top-0 z-50">
-        <div class="px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                 Logo 
-                <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <h1 class="text-2xl font-bold text-primary">E-Fama</h1>
-                    </div>
-                </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <!-- Logo -->
+          <h1 class="text-2xl font-bold text-green-600">E-Fama</h1>
 
-                 Navigation Buttons 
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <button class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                            Dashboard
-                        </button>
-                        <button class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                            Analytics
-                        </button>
-                        <button class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                            Reports
-                        </button>
-                        <button class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                            Settings
-                        </button>
-                    </div>
-                </div>
+          <!-- User Icon -->
+            <div class="relative">
+                <!-- User Icon Button -->
+                <button
+                @click="toggleMenu"
+                class="p-2 rounded-full text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none"
+                aria-label="User menu"
+                >
+                <i class="fas fa-user text-xl"></i>
+                </button>
 
-                 User Menu 
-                <div class="flex items-center space-x-4">
-                    <button class="text-gray-700 hover:text-primary p-2 rounded-md transition-colors">
-                        <i data-lucide="bell" class="w-5 h-5"></i>
+                <!-- Dropdown Menu -->
+                <div
+                v-if="menuOpen"
+                class="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
+                >
+                <div class="px-4 py-3 border-b border-gray-100">
+                    <p class="text-sm font-semibold text-gray-900">John Doe</p>
+                    <p class="text-xs text-gray-500">john@example.com</p>
+                </div>
+                <ul class="py-1">
+                    <li>
+                    <NuxtLink
+                        to="/profile"
+                        class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors"
+                    >
+                        <i class="fas fa-user-circle mr-3 text-lg text-primary"></i>
+                        Profile
+                    </NuxtLink>
+                    </li>
+                    <li>
+                    <button
+                        @click="logout"
+                        class="flex items-center w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                    >
+                        <i class="fas fa-sign-out-alt mr-3 text-lg"></i>
+                        Logout
                     </button>
-                    <div class="relative">
-                        <button class="flex items-center space-x-2 text-gray-700 hover:text-primary p-2 rounded-md transition-colors">
-                            <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                                <span class="text-white text-sm font-medium">JD</span>
-                            </div>
-                            <i data-lucide="chevron-down" class="w-4 h-4"></i>
-                        </button>
-                    </div>
-                </div>
-
-                 Mobile menu button 
-                <div class="md:hidden">
-                    <button class="text-gray-700 hover:text-primary p-2 rounded-md transition-colors" onclick="toggleMobileMenu()">
-                        <i data-lucide="menu" class="w-6 h-6"></i>
-                    </button>
+                    </li>
+                </ul>
                 </div>
             </div>
         </div>
-
-         Mobile Navigation Menu 
-        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <button class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium w-full text-left transition-colors">
-                    Dashboard
-                </button>
-                <button class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium w-full text-left transition-colors">
-                    Analytics
-                </button>
-                <button class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium w-full text-left transition-colors">
-                    Reports
-                </button>
-                <button class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium w-full text-left transition-colors">
-                    Settings
-                </button>
-            </div>
-        </div>
+      </div>
     </nav>
 
-    <div class="flex pt-16">
-         Sidebar 
-        <div class="hidden lg:flex lg:flex-shrink-0">
-            <div class="flex flex-col w-64">
-                <div class="flex flex-col flex-grow bg-white border-r border-gray-200 pt-5 pb-4 overflow-y-auto">
-                    <div class="flex-grow flex flex-col">
-                        <nav class="flex-1 px-2 space-y-1">
-                             Dashboard Section 
-                            <div class="space-y-1">
-                                <button class="bg-primary text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left transition-colors">
-                                    <i data-lucide="home" class="text-white mr-3 flex-shrink-0 h-5 w-5"></i>
-                                    Overview
-                                </button>
-                                <button class="text-gray-700 hover:text-primary hover:bg-gray-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left transition-colors">
-                                    <i data-lucide="bar-chart-3" class="text-gray-400 group-hover:text-primary mr-3 flex-shrink-0 h-5 w-5"></i>
-                                    Analytics
-                                </button>
-                                <button class="text-gray-700 hover:text-primary hover:bg-gray-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left transition-colors">
-                                    <i data-lucide="users" class="text-gray-400 group-hover:text-primary mr-3 flex-shrink-0 h-5 w-5"></i>
-                                    Customers
-                                </button>
-                                <button class="text-gray-700 hover:text-primary hover:bg-gray-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left transition-colors">
-                                    <i data-lucide="shopping-bag" class="text-gray-400 group-hover:text-primary mr-3 flex-shrink-0 h-5 w-5"></i>
-                                    Orders
-                                </button>
-                                <button class="text-gray-700 hover:text-primary hover:bg-gray-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left transition-colors">
-                                    <i data-lucide="package" class="text-gray-400 group-hover:text-primary mr-3 flex-shrink-0 h-5 w-5"></i>
-                                    Products
-                                </button>
-                            </div>
+    <!-- Main content -->
+    <main class="pt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Welcome Section -->
+      <section class="mb-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-2">Welcome back!</h2>
+        <p class="text-gray-600">Here's what's happening with your farm today.</p>
+      </section>
 
-                             Management Section 
-                            <div class="pt-6">
-                                <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                    Management
-                                </h3>
-                                <div class="mt-2 space-y-1">
-                                    <button class="text-gray-700 hover:text-primary hover:bg-gray-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left transition-colors">
-                                        <i data-lucide="file-text" class="text-gray-400 group-hover:text-primary mr-3 flex-shrink-0 h-5 w-5"></i>
-                                        Reports
-                                    </button>
-                                    <button class="text-gray-700 hover:text-primary hover:bg-gray-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left transition-colors">
-                                        <i data-lucide="credit-card" class="text-gray-400 group-hover:text-primary mr-3 flex-shrink-0 h-5 w-5"></i>
-                                        Billing
-                                    </button>
-                                    <button class="text-gray-700 hover:text-primary hover:bg-gray-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left transition-colors">
-                                        <i data-lucide="settings" class="text-gray-400 group-hover:text-primary mr-3 flex-shrink-0 h-5 w-5"></i>
-                                        Settings
-                                    </button>
-                                </div>
-                            </div>
+    <section class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl shadow-lg border border-blue-200 p-6 mb-8 animate-fade-in">
+    <div class="flex items-center justify-between mb-4">
+        <h3 class="text-2xl font-bold text-blue-900 flex items-center space-x-2">
+        <i class="fas fa-chart-line text-blue-700 text-2xl"></i>
+        <span>Forecasting Results</span>
+        </h3>
+        <span class="text-sm text-blue-600 bg-blue-200 px-2 py-1 rounded-full">
+        Last updated: 5 mins ago
+        </span>
+    </div>
 
-                             Support Section 
-                            <div class="pt-6">
-                                <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                    Support
-                                </h3>
-                                <div class="mt-2 space-y-1">
-                                    <button class="text-gray-700 hover:text-primary hover:bg-gray-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left transition-colors">
-                                        <i data-lucide="help-circle" class="text-gray-400 group-hover:text-primary mr-3 flex-shrink-0 h-5 w-5"></i>
-                                        Help Center
-                                    </button>
-                                    <button class="text-gray-700 hover:text-primary hover:bg-gray-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left transition-colors">
-                                        <i data-lucide="message-circle" class="text-gray-400 group-hover:text-primary mr-3 flex-shrink-0 h-5 w-5"></i>
-                                        Contact Support
-                                    </button>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
-
-                     User Profile Section 
-                    <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                                <span class="text-white text-sm font-medium">JD</span>
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-gray-700">John Doe</p>
-                                <p class="text-xs text-gray-500">john@e-fama.com</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- 7-Day Forecast -->
+        <div class="bg-white border border-blue-200 rounded-lg p-5 shadow-sm hover:shadow-md transition">
+        <h4 class="text-lg font-semibold text-blue-800 mb-3">Next 7 Days</h4>
+        <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center space-x-2">
+            <i class="fas fa-dollar-sign text-green-600 text-xl"></i>
+            <span class="text-gray-700">Forecasted Price</span>
             </div>
+            <span class="text-2xl font-bold text-gray-900">R2.45 / kg</span>
+        </div>
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+            <i class="fas fa-boxes text-blue-600 text-xl"></i>
+            <span class="text-gray-700">Forecasted Demand</span>
+            </div>
+            <span class="text-2xl font-bold text-gray-900">1,200 units</span>
+        </div>
         </div>
 
-         Main Content 
-        <div class="flex-1 overflow-auto">
-            <div class="p-6">
-                 Page Header 
-                <div class="mb-8">
-                    <h1 class="text-3xl font-bold text-gray-900">Dashboard Overview</h1>
-                    <p class="mt-2 text-gray-600">Welcome back! Here's what's happening with your business today.</p>
-                </div>
-
-                 Stats Cards 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <div class="w-8 h-8 bg-primary bg-opacity-10 rounded-md flex items-center justify-center">
-                                    <i data-lucide="dollar-sign" class="w-5 h-5 text-primary"></i>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm font-medium text-gray-600">Total Revenue</p>
-                                <p class="text-2xl font-bold text-gray-900">$45,231</p>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <span class="text-sm text-primary font-medium">+12.5%</span>
-                            <span class="text-sm text-gray-500 ml-1">from last month</span>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <div class="w-8 h-8 bg-primary bg-opacity-10 rounded-md flex items-center justify-center">
-                                    <i data-lucide="users" class="w-5 h-5 text-primary"></i>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm font-medium text-gray-600">New Customers</p>
-                                <p class="text-2xl font-bold text-gray-900">1,234</p>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <span class="text-sm text-primary font-medium">+8.2%</span>
-                            <span class="text-sm text-gray-500 ml-1">from last month</span>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <div class="w-8 h-8 bg-primary bg-opacity-10 rounded-md flex items-center justify-center">
-                                    <i data-lucide="shopping-bag" class="w-5 h-5 text-primary"></i>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm font-medium text-gray-600">Total Orders</p>
-                                <p class="text-2xl font-bold text-gray-900">5,678</p>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <span class="text-sm text-primary font-medium">+15.3%</span>
-                            <span class="text-sm text-gray-500 ml-1">from last month</span>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <div class="w-8 h-8 bg-primary bg-opacity-10 rounded-md flex items-center justify-center">
-                                    <i data-lucide="trending-up" class="w-5 h-5 text-primary"></i>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm font-medium text-gray-600">Growth Rate</p>
-                                <p class="text-2xl font-bold text-gray-900">23.5%</p>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <span class="text-sm text-primary font-medium">+2.1%</span>
-                            <span class="text-sm text-gray-500 ml-1">from last month</span>
-                        </div>
-                    </div>
-                </div>
-
-                 Content Grid 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                     Recent Activity 
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
-                        <div class="p-6 border-b border-gray-200">
-                            <h3 class="text-lg font-semibold text-gray-900">Recent Activity</h3>
-                        </div>
-                        <div class="p-6">
-                            <div class="space-y-4">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 bg-primary bg-opacity-10 rounded-full flex items-center justify-center">
-                                        <i data-lucide="user-plus" class="w-4 h-4 text-primary"></i>
-                                    </div>
-                                    <div class="flex-1">
-                                        <p class="text-sm text-gray-900">New customer registered</p>
-                                        <p class="text-xs text-gray-500">2 minutes ago</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 bg-primary bg-opacity-10 rounded-full flex items-center justify-center">
-                                        <i data-lucide="shopping-cart" class="w-4 h-4 text-primary"></i>
-                                    </div>
-                                    <div class="flex-1">
-                                        <p class="text-sm text-gray-900">Order #1234 completed</p>
-                                        <p class="text-xs text-gray-500">5 minutes ago</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 bg-primary bg-opacity-10 rounded-full flex items-center justify-center">
-                                        <i data-lucide="credit-card" class="w-4 h-4 text-primary"></i>
-                                    </div>
-                                    <div class="flex-1">
-                                        <p class="text-sm text-gray-900">Payment received</p>
-                                        <p class="text-xs text-gray-500">10 minutes ago</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                     Quick Actions 
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
-                        <div class="p-6 border-b border-gray-200">
-                            <h3 class="text-lg font-semibold text-gray-900">Quick Actions</h3>
-                        </div>
-                        <div class="p-6">
-                            <div class="grid grid-cols-2 gap-4">
-                                <button class="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-primary hover:bg-primary hover:bg-opacity-5 transition-colors">
-                                    <i data-lucide="plus" class="w-8 h-8 text-primary mb-2"></i>
-                                    <span class="text-sm font-medium text-gray-900">Add Product</span>
-                                </button>
-                                <button class="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-primary hover:bg-primary hover:bg-opacity-5 transition-colors">
-                                    <i data-lucide="user-plus" class="w-8 h-8 text-primary mb-2"></i>
-                                    <span class="text-sm font-medium text-gray-900">Add Customer</span>
-                                </button>
-                                <button class="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-primary hover:bg-primary hover:bg-opacity-5 transition-colors">
-                                    <i data-lucide="file-text" class="w-8 h-8 text-primary mb-2"></i>
-                                    <span class="text-sm font-medium text-gray-900">Generate Report</span>
-                                </button>
-                                <button class="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-primary hover:bg-primary hover:bg-opacity-5 transition-colors">
-                                    <i data-lucide="settings" class="w-8 h-8 text-primary mb-2"></i>
-                                    <span class="text-sm font-medium text-gray-900">Settings</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- 30-Day Forecast -->
+        <div class="bg-white border border-blue-200 rounded-lg p-5 shadow-sm hover:shadow-md transition">
+        <h4 class="text-lg font-semibold text-blue-800 mb-3">Next 30 Days</h4>
+        <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center space-x-2">
+            <i class="fas fa-dollar-sign text-green-600 text-xl"></i>
+            <span class="text-gray-700">Forecasted Price</span>
             </div>
+            <span class="text-2xl font-bold text-gray-900">$2.60 / kg</span>
+        </div>
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+            <i class="fas fa-boxes text-blue-600 text-xl"></i>
+            <span class="text-gray-700">Forecasted Demand</span>
+            </div>
+            <span class="text-2xl font-bold text-gray-900">5,100 units</span>
+        </div>
         </div>
     </div>
-</body>
+    </section>
+
+
+      <!-- Stats Cards -->
+      <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm font-medium text-gray-600">Total Crops</p>
+              <p class="text-2xl font-bold text-gray-900">24</p>
+            </div>
+            <div class="p-3 bg-primary/10 rounded-full">
+              <i class="fas fa-seedling text-primary text-xl"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm font-medium text-gray-600">Active Listings</p>
+              <p class="text-2xl font-bold text-gray-900">12</p>
+            </div>
+            <div class="p-3 bg-blue-100 rounded-full">
+              <i class="fas fa-list text-blue-600 text-xl"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm font-medium text-gray-600">Total Sales</p>
+              <p class="text-2xl font-bold text-gray-900">R8,420</p>
+            </div>
+            <div class="p-3 bg-green-100 rounded-full">
+              <i class="fas fa-dollar-sign text-green-600 text-xl"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm font-medium text-gray-600">Pending Orders</p>
+              <p class="text-2xl font-bold text-gray-900">5</p>
+            </div>
+            <div class="p-3 bg-yellow-100 rounded-full">
+              <i class="fas fa-clock text-yellow-600 text-xl"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Quick Actions -->
+      <section class="bg-white rounded-lg shadow-sm p-6 border border-gray-200 mb-8">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <NuxtLink
+            to="/upload-crops"
+            class="flex items-center justify-center px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+            >
+            <i class="fas fa-plus mr-2"></i> Add Crop
+            </NuxtLink>
+
+
+          <button class="flex items-center justify-center px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+            <i class="fas fa-eye mr-2"></i> View Listings
+          </button>
+          <button class="flex items-center justify-center px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+            <i class="fas fa-chart-bar mr-2"></i> View Reports
+          </button>
+          <button class="flex items-center justify-center px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+            <i class="fas fa-envelope mr-2"></i> Messages
+          </button>
+        </div>
+      </section>
+
+      <!-- Recent Activity -->
+      <section class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h3>
+        <div class="space-y-4">
+          <div class="flex items-center space-x-3">
+            <div class="p-2 bg-primary/10 rounded-full">
+              <i class="fas fa-seedling text-primary"></i>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm font-medium text-gray-900">New crop listing created</p>
+              <p class="text-xs text-gray-500">2 hours ago</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-3">
+            <div class="p-2 bg-green-100 rounded-full">
+              <i class="fas fa-check text-green-600"></i>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm font-medium text-gray-900">Order completed</p>
+              <p class="text-xs text-gray-500">5 hours ago</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-3">
+            <div class="p-2 bg-blue-100 rounded-full">
+              <i class="fas fa-message text-blue-600"></i>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm font-medium text-gray-900">New message received</p>
+              <p class="text-xs text-gray-500">1 day ago</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { ref } from 'vue'
 
-onMounted(() => {
-  // If lucide was loaded via CDN
-  if (typeof lucide !== 'undefined') {
-    lucide.createIcons()
-  }
-})
+const menuOpen = ref(false)
+
+const toggleMenu = () => {
+  menuOpen.value = !menuOpen.value
+}
+
+const closeMenu = () => {
+  menuOpen.value = false
+}
 </script>
+
+<style scoped>
+@keyframes fade-in {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-in-out;
+}
+</style>
 
 

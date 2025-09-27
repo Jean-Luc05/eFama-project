@@ -8,10 +8,7 @@
                     <h1 class="text-2xl font-bold text-primary">E-Fama</h1>
                 </div>
                 <nav class="hidden md:flex space-x-8">
-                    <a href="dashboard.html" class="text-gray-700 hover:text-primary transition-colors">Dashboard</a>
-                    <a href="#" class="text-primary font-medium">Upload Crop</a>
-                    <a href="#" class="text-gray-700 hover:text-primary transition-colors">My Listings</a>
-                    <a href="#" class="text-gray-700 hover:text-primary transition-colors">Profile</a>
+                    <a href="/dashboard" class="text-gray-700 hover:text-primary transition-colors">Dashboard</a>
                 </nav>
             </div>
         </div>
@@ -161,30 +158,6 @@
                     </div>
                 </div>
 
-                <!-- Contact Information -->
-                <div class="border-t pt-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Contact Information</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="contact-name" class="block text-sm font-medium text-gray-700 mb-2">
-                                Contact Name *
-                            </label>
-                            <input type="text" id="contact-name" name="contact-name" required
-                                   placeholder="Your name"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors">
-                        </div>
-
-                        <div>
-                            <label for="contact-phone" class="block text-sm font-medium text-gray-700 mb-2">
-                                Phone Number *
-                            </label>
-                            <input type="tel" id="contact-phone" name="contact-phone" required
-                                   placeholder="(xxx) xxx-xxxx"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors">
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Submit Buttons -->
                 <div class="flex flex-col sm:flex-row gap-4 pt-6">
                     <button type="submit" 
@@ -192,33 +165,15 @@
                         Upload Crop Information
                     </button>
                     <button type="button" 
-                            class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                            class="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
                         Save as Draft
                     </button>
                 </div>
             </form>
         </div>
 
-        <!-- Help Section -->
-        <div class="mt-8 bg-green-50 border border-green-200 rounded-lg p-6">
-            <h3 class="text-lg font-semibold text-green-800 mb-2">Need Help?</h3>
-            <p class="text-green-700 mb-4">Make sure to provide accurate information to attract serious buyers.</p>
-            <ul class="text-green-700 space-y-1 text-sm">
-                <li>• Include high-quality photos if possible</li>
-                <li>• Be specific about grade and quality standards</li>
-                <li>• Set realistic pricing based on market conditions</li>
-                <li>• Provide accurate quantity and availability dates</li>
-            </ul>
-        </div>
+
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t mt-12">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <div class="text-center text-gray-500 text-sm">
-                <p>&copy; 2025 E-Fama. Connecting farmers with buyers across Canada.</p>
-            </div>
-        </div>
-    </footer>
 </body>
 </template>
