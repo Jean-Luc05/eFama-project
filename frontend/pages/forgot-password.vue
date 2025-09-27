@@ -40,25 +40,10 @@
             <div class="mt-6 text-center">
                 <p class="text-sm text-gray-600">
                     Remember your password? 
-                    <a href="signin.html" class="font-medium text-green-600 hover:text-green-500 transition-colors">
-                        Sign in here
+                    <a href="/" class="font-medium text-green-600 hover:text-green-500 transition-colors">
+                        Sign in
                     </a>
                 </p>
-            </div>
-        </div>
-
-         Additional Help Section 
-        <div class="bg-white rounded-lg shadow-md p-6 mt-6">
-            <h3 class="text-lg font-medium text-black mb-3">Need more help?</h3>
-            <div class="space-y-2 text-sm text-gray-600">
-                <p>• Check your spam folder for the reset email</p>
-                <p>• Make sure you're using the email associated with your account</p>
-                <p>• Contact support if you continue having issues</p>
-            </div>
-            <div class="mt-4">
-                <a href="mailto:support@company.com" class="text-green-600 hover:text-green-500 font-medium transition-colors">
-                    Contact Support
-                </a>
             </div>
         </div>
     </div>

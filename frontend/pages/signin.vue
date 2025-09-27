@@ -51,13 +51,13 @@
                 id="remember" 
                 name="remember"
                 v-model="form.remember"
-                class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                class="h-4 w-4 text-green-600 focus:ring-blue-500 border-gray-300 rounded"
               >
               <label for="remember" class="ml-2 block text-sm text-black">
                 Remember me
               </label>
             </div>
-            <NuxtLink to="/forgot-password" class="text-sm text-blue-600 hover:text-blue-700 transition-colors">
+            <NuxtLink to="/forgot-password" class="text-sm text-green-600 hover:text-blue-700 transition-colors">
               Forgot password?
             </NuxtLink>
           </div>
@@ -65,7 +65,7 @@
           <!-- Submit Button -->
           <button 
             type="submit"
-            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
           >
             Sign In
           </button>
@@ -104,8 +104,8 @@
         <div class="mt-8 text-center">
           <p class="text-gray-600">
             Don't have an account? 
-            <NuxtLink to="/signup" class="text-blue-600 hover:text-blue-700 font-medium transition-colors">
-              Sign up here
+            <NuxtLink to="/" class="text-green-600 hover:text-green-700 font-medium transition-colors">
+              Sign up
             </NuxtLink>
           </p>
         </div>
